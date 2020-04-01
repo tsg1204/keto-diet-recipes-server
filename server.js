@@ -136,7 +136,7 @@ app.get('/categories/:categoryId/recipes/:recipe', (req, res, next) =>{
         });
 })
 
-let PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, (error) => {
     if (error) {
@@ -144,4 +144,4 @@ app.listen(PORT, (error) => {
       }
 
       console.log(`Server is listening on ${PORT}`);
-  })
+})
