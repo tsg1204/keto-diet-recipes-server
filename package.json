@@ -1,0 +1,34 @@
+{
+  "name": "keto-diet-recipes-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.5",
+    "mongoose-unique-array": "^0.2.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.9",
+    "querystring": "^0.2.0",
+    "router": "^1.3.2"
+  },
+  "engines": {
+    "node": "10.0.0",
+    "npm": "5.1.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsg1204/keto-diet-recipes-server.git"
+  },
+  "author": "TG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tsg1204/keto-diet-recipes-server/issues"
+  },
+  "homepage": "https://github.com/tsg1204/keto-diet-recipes-server#readme"
+}
