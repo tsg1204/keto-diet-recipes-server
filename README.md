@@ -1,1 +1,1 @@
-# keto-diet-recipes-server
+# Keto Diet Recipes server
