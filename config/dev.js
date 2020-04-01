@@ -1,4 +1,6 @@
 // for dev
+// for dev
 module.exports = {
-    MONGODB_URI: 'mongodb://localhost/loveketo'
-  };
+  MONGODB_URI: 'mongodb://localhost/movie-finder',
+  TOKEN_SECRET: 'helloworld'
+};
