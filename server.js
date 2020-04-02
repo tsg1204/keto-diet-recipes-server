@@ -14,9 +14,9 @@ let recipes = [];
 const app = express()
 
 //mongoose.connect('mongodb://localhost/loveketo', { useNewUrlParser: true })
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/loveketo';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/loveketo';
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI ||'mongodb://localhost:27017/loveketo')
+mongoose.connect(MONGODB_URI)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
