@@ -60,7 +60,7 @@ app.get('/load-categories', (req, res) => {
             let cat = new Categories()
             cat.id = categories[i].id
             cat.title = categories[i].title
-            cat.recipes = []
+            cat.recipes = [ObjectId]
             cat.save((err) => {
                 if (err) throw err
               })
