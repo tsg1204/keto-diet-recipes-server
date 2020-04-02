@@ -14,27 +14,27 @@ let recipes = [];
 const app = express()
 
 //mongoose.connect('mongodb://localhost/loveketo', { useNewUrlParser: true })
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/loveketo';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/loveketo';
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI ||'mongodb://localhost/loveketo')
+mongoose.connect(MONGODB_URI ||'mongodb://localhost:27017/loveketo')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }))
 
-if (process.env.NODE_ENV === 'production') {
-    // Express will serve up production assets
-    // like our main.js file, or main.css file!
-    app.use(express.static('client/build'));
+// if (process.env.NODE_ENV === 'production') {
+//     // Express will serve up production assets
+//     // like our main.js file, or main.css file!
+//     app.use(express.static('client/build'));
   
-    // Express will serve up the index.html file
-    // if it doesn't recognize the route
-    const path = require('path');
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-}
+//     // Express will serve up the index.html file
+//     // if it doesn't recognize the route
+//     const path = require('path');
+//     app.get('*', (req, res) => {
+//       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+//     });
+// }
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); 
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
