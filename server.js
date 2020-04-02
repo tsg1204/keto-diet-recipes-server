@@ -7,13 +7,13 @@ const ObjectId = require('mongoose').Types.ObjectId
 const querySring = require('querystring')
 const http = require('http');
 const fs = require('fs');
-const url = require('url');
-const finalHandler = require('finalhandler');
-const Router = require('router');
+const router = require('express').Router()
+let categories = [];
+let recipes = [];
 
 const app = express()
 
-mongoose.connect('mongodb://localhost/loveketo')
+mongoose.connect('mongodb://localhost/loveketo', { useNewUrlParser: true })
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -31,11 +31,13 @@ if (process.env.NODE_ENV === 'production') {
     app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
-  }
-
-let categories = [];
-let recipes = [];
-
+}
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); 
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Setting up the root route
 app.get('/', (req, res) => {
