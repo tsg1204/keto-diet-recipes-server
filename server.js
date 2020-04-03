@@ -61,7 +61,7 @@ app.get('/load-categories', (req, res) => {
             let cat = new Categories()
             cat.id = categories[i].id
             cat.title = categories[i].title
-            cat.recipes = [ObjectId]
+            cat.recipes = []
             cat.save((err) => {
                 if (err) throw err
               })
@@ -111,7 +111,7 @@ app.get('/categories', (req, res, next) => {
         });
 })
 //get all recipes under the category by category id
-app.get('/categories/:categoryId', (req, res, next) => {
+app.get('/categories/:categoryId/recipes', (req, res, next) => {
     Categories.find({ _id: req.params.categoryId})
         .populate(
             {path:'recipes'})
