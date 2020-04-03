@@ -72,7 +72,7 @@ app.get('/load-categories', (req, res) => {
 })
 app.get('/load-recipes', (req, res) => {
 
-    fs.readFile("initial-data/recipes.json", "utf8", (error, data) => {
+    fs.readFile("initial-data/add-data.json", "utf8", (error, data) => {
         if (error) throw error;
         recipes = JSON.parse(data);
         console.log(`Server setup: ${recipes.length} recipes loaded`);
@@ -141,6 +141,37 @@ app.get('/categories/:categoryId/recipes/:recipe', (req, res, next) =>{
         }
         });
 })
+
+//toggle a recipe as favorite 
+app.put('/categories/:categoryId/recipes/:recipe/toggleFavorite', (req, res) =>{
+    
+    Recipes.findById(req.params.recipe)
+      .exec((err, recipe) => {
+          if (err) {
+              return send(err)
+          } else if(recipe) {
+              if (req.body.favorite) {
+                recipe.favorite = true
+              } else { 
+                recipe.favorite = false
+              }
+              
+              recipe.save((err, response) => {
+                if (err) {
+                    res.send(err)
+                } else {
+                    //res.status(200);
+                    return res.end(`Recipe with id ${req.params.recipe} updated`);
+                }
+              })
+          } else {
+            res.status(404);
+            return res.end(`Recipe with id ${req.params.recipe} not found`);
+        }
+        });
+})
+
+
 
 const PORT = process.env.PORT || 3000;
 
