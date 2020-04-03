@@ -171,6 +171,22 @@ app.put('/categories/:categoryId/recipes/:recipe/toggleFavorite', (req, res) =>{
         });
 })
 
+//fetch favorite recipe
+app.get('/categories/:categoryId/recipes/:recipe', (req, res, next) =>{
+    
+    Recipes.findOne({ _id: req.params.recipe})
+      .exec((err, recipe) => {
+          if (err) {
+              return next(err)
+          } if(recipe.favorite) {
+              res.send(recipe)
+          } else {
+            res.status(404);
+            return res.end(`Recipe with id ${req.params.recipe} is not a favorite recipe`);
+        }
+        });
+})
+
 
 
 const PORT = process.env.PORT || 3000;
