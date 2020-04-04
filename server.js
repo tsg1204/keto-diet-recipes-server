@@ -185,7 +185,7 @@ app.get('/favorites', (req, res, next) =>{
                         favorites.push(item)
                     }
                 })
-                console.log('favorites: ', favorites)
+                //console.log('favorites: ', favorites)
                 res.send(favorites)   
           } else {
             res.status(404);
@@ -193,6 +193,30 @@ app.get('/favorites', (req, res, next) =>{
         }
         });
 })
+
+app.put('/removeFavorite/:recipe', (req, res) =>{
+    
+    Recipes.findById(req.params.recipe)
+      .exec((err, recipe) => {
+          if (err) {
+              return send(err)
+          } else if(recipe) {
+                recipe.favorite = false
+                recipe.save((err, response) => {
+                    if (err) {
+                        res.send(err)
+                    } else {
+                        //res.status(200);
+                        return res.end(`Recipe with id ${req.params.recipe} removed from favorites`);
+                    }
+              })
+          } else {
+            res.status(404);
+            return res.end(`Recipe with id ${req.params.recipe} not found`);
+        }
+        });
+})
+
 
 
 
