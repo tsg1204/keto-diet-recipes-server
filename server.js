@@ -171,18 +171,25 @@ app.put('/categories/:categoryId/recipes/:recipe/toggleFavorite', (req, res) =>{
         });
 })
 
-//fetch favorite recipe
-app.get('/categories/:categoryId/recipes/:recipe', (req, res, next) =>{
+//fetch all favorite recipes
+app.get('/favorites', (req, res, next) =>{
     
-    Recipes.findOne({ _id: req.params.recipe})
-      .exec((err, recipe) => {
+    Recipes.find()
+      .exec((err, recipes) => {
           if (err) {
               return next(err)
-          } if(recipe.favorite) {
-              res.send(recipe)
+          } if(recipes.length > 0) {
+                let favorites = []
+                recipes.forEach( item => {
+                    if (item.favorite === 'true') {
+                        favorites.push(item)
+                    }
+                })
+                console.log('favorites: ', favorites)
+                res.send(favorites)   
           } else {
             res.status(404);
-            return res.end(`Recipe with id ${req.params.recipe} is not a favorite recipe`);
+            return res.end(`No favorite recipes.`);
         }
         });
 })
