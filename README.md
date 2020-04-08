@@ -4,3 +4,7 @@ This is a server for Keto Diet App built with Expo (Expo is an open-source platf
 # Demo
 https://tsg1204.github.io/keto-diet-recipes/
 
+# Installation
+npm install
+
+
